@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+    <div class="col-6">
+        <form action="{% url 'index' %}" method="POST">
+          {% csrf_token %}
+          <h4><label for="content">분석할 글을 입력해주세요.</label></h4>
+          <textarea name="content" id="content" cols="40" rows="20"></textarea>
+          <div class="w-100"></div>
+          <input class="btn btn-primary ml-auto" type="submit" value="제출" />
+        </form>
+    </div>
+    <div class="col-6 bg-light p-4">
+        {% if word_counted %}
+        {% for word, count in word_counted.items %}
+        <p>{{ word }} - {{ count }}</p>
+        {% endfor %}
+        {% else %}
+        <h2>내용이 없습니다.</h2>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
